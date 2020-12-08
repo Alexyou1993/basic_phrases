@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(title: 'Basic Statements'),
+      home: const MyHomePage(title: 'Basic Phrases'),
     );
   }
 }
@@ -28,243 +28,90 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
+  List<String> audios = <String>[
+    'goodafternoon.mp3',
+    'goodevening.mp3',
+    'HowAreYou.mp3',
+    'Imallright.mp3',
+    'Butyou.mp3',
+    'All good.mp3',
+    'Thank you.mp3',
+    'I love you.mp3',
+    'keyboard.mp3',
+    'chiken.mp3',
+    'cat.mp3',
+    'Dumpling.mp3',
+    'MeatRolls.mp3',
+    'AreYouHungry.mp3',
+    'DoYoOftenGoToThem.mp3',
+    'winter.mp3',
+  ];
+  List<String> titles = <String>[
+    'Buna ziua',
+    'Buna seara',
+    'Ce mai faci?',
+    'Sunt bine, Multumesc!',
+    'Dar, tu?',
+    'Toate bune',
+    'Multumesc!',
+    'Te iubesc',
+    'Tastatura',
+    'Gaina',
+    'Pisica',
+    'Galusca',
+    'Sarmale',
+    'Tie foame?',
+    'Mergi des la ei?',
+    'A venit iarna',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade700,
       appBar: AppBar(
         centerTitle: true,
         title: Text(widget.title),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView(
-          children: <Widget>[
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/goodafternoon.mp3'));
-              },
-              child: const Text(
-                'Buna ziua',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              margin: const EdgeInsets.all(8),
+              child: Column(
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () async {
+                      if (assetsAudioPlayer != null &&
+                          assetsAudioPlayer.isPlaying.value) {
+                        await assetsAudioPlayer.stop();
+                      }
+                      assetsAudioPlayer = AssetsAudioPlayer();
+                      assetsAudioPlayer
+                          .open(Audio('assets/audio/${audios[index]}'));
+                    },
+                    child: Text(
+                      titles[index].toString(),
+                      style: const TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    color: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(color: Colors.black),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/goodevening.mp3'));
-              },
-              child: const Text(
-                'Buna seara',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/HowAreYou.mp3'));
-              },
-              child: const Text(
-                'Ce mai faci?',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/Imallright.mp3'));
-              },
-              child: const Text(
-                'Sunt bine, Multumesc!',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/Butyou.mp3'));
-              },
-              child: const Text(
-                'Dar, tu?',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/All good.mp3'));
-              },
-              child: const Text(
-                'Toate bune',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/Thank you.mp3'));
-              },
-              child: const Text(
-                'Multumesc!',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/I love you.mp3'));
-              },
-              child: const Text(
-                'Te iubesc',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/keyboard.mp3'));
-              },
-              child: const Text(
-                'Tastatura',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/chiken.mp3'));
-              },
-              child: const Text(
-                'Gaina',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/cat.mp3'));
-              },
-              child: const Text(
-                'Pisica',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/Dumpling.mp3'));
-              },
-              child: const Text(
-                'Galusca',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/MeatRolls.mp3'));
-              },
-              child: const Text(
-                'Sarmale',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/AreYouHungry.mp3'));
-              },
-              child: const Text(
-                'Tie foame?',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer
-                    .open(Audio('assets/audio/DoYoOftenGoToThem.mp3'));
-              },
-              child: const Text(
-                'Mergi des la ei?',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            FlatButton(
-              onPressed: () {
-                final AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-                assetsAudioPlayer.open(Audio('assets/audio/winter.mp3'));
-              },
-              child: const Text(
-                'A venit iarna',
-                style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
+            );
+          },
+          itemCount: audios == null ? 0 : audios.length,
         ),
       ),
     );
