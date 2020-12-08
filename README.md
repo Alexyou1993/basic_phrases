@@ -1,4 +1,4 @@
-# basic_statemants
+# basic_phrases
 
 A new Flutter project.
 
