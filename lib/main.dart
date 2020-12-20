@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -85,13 +85,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   FlatButton(
                     onPressed: () async {
-                      if (assetsAudioPlayer != null &&
-                          assetsAudioPlayer.isPlaying.value) {
+                      if (assetsAudioPlayer != null && assetsAudioPlayer.isPlaying.value) {
                         await assetsAudioPlayer.stop();
                       }
                       assetsAudioPlayer = AssetsAudioPlayer();
-                      assetsAudioPlayer
-                          .open(Audio('assets/audio/${audios[index]}'));
+                      assetsAudioPlayer.open(Audio('assets/audio/${audios[index]}'));
                     },
                     child: Text(
                       titles[index].toString(),
